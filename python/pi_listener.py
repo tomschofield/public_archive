@@ -46,11 +46,20 @@ def main():
                         if(x[0].split("/")[2][:2]=="sd"):
                                 if device_count < 1:
                                         print "device name ", x[0]
-                                        #command = "mv ./images/_90402_RP_P_2017_6105.jpg "+x[0]
-                                        #os.system(command)
-                                        print get_free_space_mb(x[0])
+                                        #this line is hack to remove non-existing virtual isk e.g. /media/sda1
+                                        if get_free_space_mb(x[0]) >6000:
+                                            print get_free_space_mb(x[0])
+                                            command = "mv ../images/_90402_SK_A_138.jpg "+x[0]+"/_90402_SK_A_138.jpg"
+                                            os.system(command)
+                                            command = "umount -l /media/sda1"
+                                            os.system(command)
+                                            command = "umount -l /media/sdb1"
+                                            os.system(command)
+                                            command = "umount -l /media/sdc1"
+                                            os.system(command)
+                                        
         device_count+=1
-        break
+        #break
 
         
 
