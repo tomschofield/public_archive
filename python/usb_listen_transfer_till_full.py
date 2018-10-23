@@ -85,6 +85,7 @@ def listen(image_dir,green_pin,red_pin):
 	                if device_count < 1:
 	                        print "device name ", x[0]
 	                        #this line is hack to remove non-existing virtual isk e.g. /media/sda1
+	                        #TODO update so that 6000 is free disk space on the pi
 	                        if get_free_space_mb(x[0]) >6000:
 	                            print get_free_space_mb(x[0])
 	                            transfer_until_full(image_dir, drive_path, green_pin, red_pin)

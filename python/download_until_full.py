@@ -20,8 +20,8 @@ def get_noun_list(path):
 
 
 def get_europeanna_data(search_term, api_key):
-        url='https://www.europeana.eu/api/v2/search.json?wskey=bPuG7ryC8&query=entity&qf=IMAGE_SIZE%3Aextra_large&reusability=open&qf=TYPE%3AIMAGE&start=1&rows=100&profile=rich&cursor=*'
-        #url = 'http://www.europeana.eu/api/v2/search.json?wskey='+api_key+'&query='+search_term+'&qf=IMAGE_SIZE%3Aextra_large&reusability=open&qf=TYPE%3AIMAGE&start=1&rows=100&profile=rich&cursor=*'
+        #url='https://www.europeana.eu/api/v2/search.json?wskey=bPuG7ryC8&query=entity&qf=IMAGE_SIZE%3Aextra_large&reusability=open&qf=TYPE%3AIMAGE&start=1&rows=100&profile=rich&cursor=*'
+        url = 'http://www.europeana.eu/api/v2/search.json?wskey='+api_key+'&query='+search_term+'&qf=IMAGE_SIZE%3Aextra_large&reusability=open&qf=TYPE%3AIMAGE&start=1&rows=100&profile=rich&cursor=*'
         print url
         response = urllib.urlopen(url)
         data = json.loads(response.read())
@@ -80,7 +80,7 @@ for noun in noun_list:
         print "___________________________getting data for",noun,"___________________________"
         try:
                 data = get_europeanna_data(noun, api_key)
-                transfer_until_full(data, "./", 19555)
+                transfer_until_full(data, "./", 5000)
                 f = open(path,'wb')
                 for i in range(index, len(noun_list)-1):
                         f.write(noun_list[i]+"\n")
