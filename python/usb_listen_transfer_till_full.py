@@ -59,10 +59,23 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin):
 	GPIO.output(red_pin,GPIO.LOW)
 	GPIO.output(green_pin,GPIO.HIGH)
 
+def force_unmount_everything():
+
+    command = "umount -l /media/sda1"
+    os.system(command)
+    command = "umount -l /media/sdb1"
+    os.system(command)
+    command = "umount -l /media/sdc1"
+    os.system(command)
+    command = "umount -l /dev/sda1"
+    os.system(command)
+    command = "umount -l /dev/sdb1"
+    os.system(command)
+    command = "umount -l /dev/sdc1"
+    os.system(command)
 
 
-
-def listen(image_dir,green_pin,red_pin):
+def listen(image_dir,mount_directory,green_pin,red_pin):
     BASE_PATH = os.path.abspath(os.path.dirname(__file__))
     path = functools.partial(os.path.join, BASE_PATH)
     call = lambda x, *args: subprocess.call([path(x)] + list(args))
@@ -78,18 +91,17 @@ def listen(image_dir,green_pin,red_pin):
         #print(device)
 	time.sleep(3)
 	os.system("mountpy")
-	for x in os.walk(directory):
+	for x in os.walk(mount_directory):
 		if(len(x[0].split("/")) == 3):
-	        #print "end of path",x[0].split("/")[2], x[0].split("/")[2][:2]
-	        if(x[0].split("/")[2][:2]=="sd"):
-	                if device_count < 1:
-	                        print "device name ", x[0]
-	                        #this line is hack to remove non-existing virtual isk e.g. /media/sda1
-	                        #TODO update so that 6000 is free disk space on the pi
-	                        if get_free_space_mb(x[0]) >6000:
-	                            print get_free_space_mb(x[0])
-	                            transfer_until_full(image_dir, drive_path, green_pin, red_pin)
-	                            force_unmount_everything()
+			if(x[0].split("/")[2][:2]=="sd"):
+				if device_count < 1:
+					print "device name ", x[0]
+					#this line is hack to remove non-existing virtual isk e.g. /media/sda1
+					#TODO update so that 6000 is free disk space on the pi
+					if get_free_space_mb(x[0]) >6000:
+						print "valid device: ", x[0],get_free_space_mb(x[0])
+						transfer_until_full(image_dir, x[0], green_pin, red_pin)
+						force_unmount_everything()
 				#now lets transfer files one by one
 				#first check that the source directory isn't empty (it shouldn't be but still)
 				
@@ -100,10 +112,11 @@ def listen(image_dir,green_pin,red_pin):
 if __name__ == '__main__':
     # main()
     image_directory = "../images/"
-
-    print "starting transfer"
-    setup_GPIO()
+    mount_directory = "/media/"
+    print "listening..."
+    
     green_pin=12
     red_pin=16
-    listen(directory,green_pin,red_pin)
-    print "finished transfer"
+    setup_GPIO(green_pin,red_pin)
+    listen(image_directory,mount_directory,green_pin,red_pin)
+    

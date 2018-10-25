@@ -80,7 +80,7 @@ for noun in noun_list:
         print "___________________________getting data for",noun,"___________________________"
         try:
                 data = get_europeanna_data(noun, api_key)
-                transfer_until_full(data, "./", 5000)
+                transfer_until_full(data, "./", 5240)
                 f = open(path,'wb')
                 for i in range(index, len(noun_list)-1):
                         f.write(noun_list[i]+"\n")

@@ -1,0 +1,204 @@
+getting noun list
+starting scrape
+___________________________getting data for thing ___________________________
+http://www.europeana.eu/api/v2/search.json?wskey=bPuG7ryC8&query=thing&qf=IMAGE_SIZE%3Aextra_large&reusability=open&qf=TYPE%3AIMAGE&start=1&rows=100&profile=rich&cursor=*
+saving to  ../images/_9200579_z6cmhjzz.jpg
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+saving to  ../images/_9200579_ys4kwb55.jpg
+space remaining  5256
+saving to  ../images/_9200579_xzh2qwwp.jpg
+space remaining  5258
+saving to  ../images/_9200579_wdtw74tw.jpg
+space remaining  5258
+saving to  ../images/_9200579_ux9w9m86.jpg
+space remaining  5258
+saving to  ../images/_9200579_ur7ebxyd.jpg
+space remaining  5257
+saving to  ../images/_9200579_tjm6vat2.jpg
+space remaining  5257
+saving to  ../images/_9200579_t2xetr7s.jpg
+space remaining  5257
+saving to  ../images/_9200579_rpv5by3k.jpg
+space remaining  5257
+saving to  ../images/_9200579_pdxcj3mt.jpg
+space remaining  5257
+saving to  ../images/_9200579_muqctekn.jpg
+space remaining  5257
+saving to  ../images/_9200579_kb3qc28v.jpg
+space remaining  5257
+saving to  ../images/_9200579_k5huswd4.jpg
+space remaining  5257
+saving to  ../images/_9200579_h8mf3sec.jpg
+space remaining  5257
+saving to  ../images/_9200579_gbt3dz5s.jpg
+space remaining  5257
+saving to  ../images/_9200579_frsabkz6.jpg
+space remaining  5256
+saving to  ../images/_9200579_fh9xabme.jpg
+space remaining  5256
+saving to  ../images/_9200579_ffbeb59x.jpg
+space remaining  5256
+saving to  ../images/_9200579_escrurgx.jpg
+space remaining  5256
+saving to  ../images/_9200579_e2famnst.jpg
+space remaining  5256
+saving to  ../images/_9200579_djerem5x.jpg
+space remaining  5256
+saving to  ../images/_9200579_dcfkqeeg.jpg
+space remaining  5256
+saving to  ../images/_9200579_d3m28hqc.jpg
+space remaining  5256
+saving to  ../images/_9200579_cwnyhyn7.jpg
+space remaining  5256
+saving to  ../images/_9200579_bv3yawme.jpg
+space remaining  5255
+saving to  ../images/_9200579_aj47sjda.jpg
+space remaining  5255
+saving to  ../images/_2021012_app_si_A_2002_456.jpg
+space remaining  5254
+saving to  ../images/_2021648_1186_AB01869.jpg
+space remaining  5253
+saving to  ../images/_2021648_1186_AB00505.jpg
+space remaining  5252
+saving to  ../images/_2020726_DR_85.jpg
+space remaining  5252
+saving to  ../images/_90402_RP_P_OB_205_492.jpg
+space remaining  5251
+updated noun list
+___________________________getting data for object ___________________________
+http://www.europeana.eu/api/v2/search.json?wskey=bPuG7ryC8&query=object&qf=IMAGE_SIZE%3Aextra_large&reusability=open&qf=TYPE%3AIMAGE&start=1&rows=100&profile=rich&cursor=*
+saving to  ../images/_90402_SK_C_513_A.jpg
+space remaining  5251
+saving to  ../images/_90402_SK_C_513.jpg
+space remaining  5250
+saving to  ../images/_90402_SK_C_1761.jpg
+space remaining  5249
+saving to  ../images/_90402_SK_A_941.jpg
+space remaining  5249
+saving to  ../images/_90402_SK_A_938.jpg
+space remaining  5248
+saving to  ../images/_90402_SK_A_937.jpg
+space remaining  5248
+saving to  ../images/_90402_SK_A_936.jpg
+space remaining  5248
+saving to  ../images/_90402_SK_A_929.jpg
+space remaining  5247
+saving to  ../images/_90402_SK_A_928.jpg
+space remaining  5247
+saving to  ../images/_90402_SK_A_4971.jpg
+space remaining  5245
+saving to  ../images/_90402_SK_A_4907.jpg
+space remaining  5245
+saving to  ../images/_90402_SK_A_4905.jpg
+space remaining  5244
+saving to  ../images/_90402_SK_A_4897.jpg
+space remaining  5244
+saving to  ../images/_90402_SK_A_4903.jpg
+space remaining  5243
+saving to  ../images/_90402_SK_A_4900.jpg
+space remaining  5242
+saving to  ../images/_90402_SK_A_4830.jpg
+space remaining  5241
+saving to  ../images/_90402_SK_A_4205.jpg
+saving to  ../images/_90402_SK_A_4090.jpg
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+waiting for free space. current space is:  5238
+saving to  ../images/_90402_SK_A_3877.jpg
+saving to  ../images/_90402_SK_A_3838.jpg
+space remaining  5258
+saving to  ../images/_90402_SK_A_3752.jpg
+space remaining  5257
+saving to  ../images/_90402_SK_A_3751.jpg
+space remaining  5257
+saving to  ../images/_90402_SK_A_3428.jpg
+space remaining  5256
+saving to  ../images/_90402_SK_A_3280.jpg
+space remaining  5254
+saving to  ../images/_90402_SK_A_3222.jpg
+space remaining  5254
+saving to  ../images/_90402_SK_A_3221.jpg
+space remaining  5253
+saving to  ../images/_90402_SK_A_2362.jpg
+space remaining  5249
+saving to  ../images/_90402_SK_A_2099.jpg
+space remaining  5246
+saving to  ../images/_90402_SK_A_199.jpg
+space remaining  5241
+savin
