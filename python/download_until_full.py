@@ -56,16 +56,18 @@ def transfer_until_full(data, dirname, free_space_threshold_mb):
                 image_path="../images/"+id+".jpg"
                 meta_data_path="../meta_data/"+id+".json"
                 print "saving to ",image_path
-                try:
-                        urllib.urlretrieve(item["edmIsShownBy"][0], image_path)
-                        with open(meta_data_path, "w") as write_file:
-                                json.dump(item, write_file)
-                        if get_free_space_mb(dirname) > free_space_threshold_mb:
-                                print "space remaining ",get_free_space_mb(dirname)
-                        else:
-                                poll_until_free_space(dirname, free_space_threshold_mb)
-                except IOError:
-                        print "download error"
+                #THIS IS THE BIT YOU WANT TOM
+                if "edmIsShownBy" in item:
+                	try:
+                    	    urllib.urlretrieve(item["edmIsShownBy"][0], image_path)
+                    	    with open(meta_data_path, "w") as write_file:
+                    	            json.dump(item, write_file)
+                    	    if get_free_space_mb(dirname) > free_space_threshold_mb:
+                    	            print "space remaining ",get_free_space_mb(dirname)
+                    	    else:
+                    	            poll_until_free_space(dirname, free_space_threshold_mb)
+                	except IOError:
+                	        print "download error"
 
 print "getting noun list"
 path = "../noun_list/noun_list.txt"
@@ -80,7 +82,7 @@ for noun in noun_list:
         print "___________________________getting data for",noun,"___________________________"
         try:
                 data = get_europeanna_data(noun, api_key)
-                transfer_until_full(data, "./", 5240)
+                transfer_until_full(data, "./", 1000)
                 f = open(path,'wb')
                 for i in range(index, len(noun_list)-1):
                         f.write(noun_list[i]+"\n")
