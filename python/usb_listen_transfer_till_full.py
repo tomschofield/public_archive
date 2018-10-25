@@ -12,6 +12,7 @@ import platform
 import sys
 import time
 
+#set the pi pins so it starts off green on and red off
 def setup_GPIO(green_pin, red_pin):
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
@@ -38,6 +39,7 @@ def dir_is_empty(path):
 def get_file_size(path):
 	return os.path.getsize(path) / 1000.0 / 1000.0
 
+#fills the target drive until its full of images sourced from image_dir
 def transfer_until_full(image_dir, drive_path, green_pin, red_pin):
 	GPIO.output(green_pin,GPIO.LOW)
 	GPIO.output(red_pin,GPIO.HIGH)
@@ -59,6 +61,7 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin):
 	GPIO.output(red_pin,GPIO.LOW)
 	GPIO.output(green_pin,GPIO.HIGH)
 
+#this is not really the way to do this...better than ripping out USB sticks when they're mounted though
 def force_unmount_everything():
 
     command = "umount -l /media/sda1"
@@ -74,40 +77,36 @@ def force_unmount_everything():
     command = "umount -l /dev/sdc1"
     os.system(command)
 
-
+#listen for USB hotplug events
 def listen(image_dir,mount_directory,green_pin,red_pin):
     BASE_PATH = os.path.abspath(os.path.dirname(__file__))
     path = functools.partial(os.path.join, BASE_PATH)
     call = lambda x, *args: subprocess.call([path(x)] + list(args))
 
+    #uses pyudev to monitor usb
     context = pyudev.Context()
     monitor = pyudev.Monitor.from_netlink(context)
     monitor.filter_by(subsystem='usb')  # Remove this line to listen for all devices.
     monitor.start()
 
     device_count = 0
+    #if there's a USB event go through the devices one by one
     for device in iter(monitor.poll, None):
-        # I can add more logic here, to run only certain kinds of devices are plugged.
-        #print(device)
+
 	time.sleep(3)
+	#mount all devices attached
 	os.system("mountpy")
+	#this is a hacky way of going through sub dirs of a known mount point (/media) and find one that starts in sd and is big
 	for x in os.walk(mount_directory):
 		if(len(x[0].split("/")) == 3):
 			if(x[0].split("/")[2][:2]=="sd"):
 				if device_count < 1:
 					print "device name ", x[0]
-					#this line is hack to remove non-existing virtual isk e.g. /media/sda1
-					#TODO update so that 6000 is free disk space on the pi
-					if get_free_space_mb(x[0]) >6000:
+					#this line is hack to remove non-existing virtual disk e.g. /media/sda1 (these should return a size which is the available space on the pi)
+					if get_free_space_mb(x[0]) >get_free_space_mb("./home")*1.2:
 						print "valid device: ", x[0],get_free_space_mb(x[0])
 						transfer_until_full(image_dir, x[0], green_pin, red_pin)
 						force_unmount_everything()
-				#now lets transfer files one by one
-				#first check that the source directory isn't empty (it shouldn't be but still)
-				
-
-	
-
 
 if __name__ == '__main__':
     # main()
