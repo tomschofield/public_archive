@@ -64,6 +64,13 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 			#try:
 			result = os.system(command)
 			print "result", result
+			#this is the error code for cannot create regular file
+			if(result ==256):
+				print "stick ripped out in transfer function"
+				stick_ripped_out==True
+				GPIO.output(red_pin,GPIO.LOW)
+				GPIO.output(green_pin,GPIO.HIGH)
+				break
 			#except OSError as e:
 				#print "IOError a!!!!!!!!!!"
 				#if( e.args[0]==2):
