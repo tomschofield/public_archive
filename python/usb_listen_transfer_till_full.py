@@ -134,7 +134,7 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 			print "mount_from nd to",mount_from,mount_to
 	# 		os.system("mount -o sync "+ mount_from+" "+mount_to )
 			if(exploded[2]!="root"):
-				print "got valid drive"
+				print "got valid drive", mount_to
 				transfer_until_full(image_dir, mount_to, green_pin, red_pin, stick_ripped_out)
 				command = "eject "+mount_to
 				os.system(command)
