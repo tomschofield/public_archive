@@ -40,17 +40,17 @@ def get_file_size(path):
 	return os.path.getsize(path) / 1000.0 / 1000.0
 
 #fills the target drive until its full of images sourced from image_dir
-def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_out):
+def transfer_until_full(image_dir, drive_path, green_pin, red_pin):
 	GPIO.output(green_pin,GPIO.LOW)
 	GPIO.output(red_pin,GPIO.HIGH)
 
 	while (dir_is_empty(image_dir)==False):
-		if (stick_ripped_out):
-			print "stick ripped out"
-			stick_ripped_out = False
-			GPIO.output(red_pin,GPIO.LOW)
-			GPIO.output(green_pin,GPIO.HIGH)
-			break
+# 		if (stick_ripped_out):
+# 			print "stick ripped out"
+# 			stick_ripped_out = False
+# 			GPIO.output(red_pin,GPIO.LOW)
+# 			GPIO.output(green_pin,GPIO.HIGH)
+# 			break
 		GPIO.output(red_pin,GPIO.HIGH)
 		first_file_name_in_dir = get_file_list(image_dir)[0]
 		file_size = get_file_size(image_dir+first_file_name_in_dir)
@@ -84,7 +84,7 @@ def force_unmount_everything():
     os.system(command)
 
 #listen for USB hotplug events
-def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
+def listen(image_dir,mount_directory,green_pin,red_pin):
     BASE_PATH = os.path.abspath(os.path.dirname(__file__))
     path = functools.partial(os.path.join, BASE_PATH)
     call = lambda x, *args: subprocess.call([path(x)] + list(args))
@@ -99,6 +99,7 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
     #if there's a USB event go through the devices one by one
     for device in iter(monitor.poll, None):
 	if (device['ACTION']=='add' or device['ACTION']=='bind'):
+		print "device added"
 		time.sleep(3)
 		#mount all devices attached
 		os.system("mountpy")
@@ -113,9 +114,9 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 							print "valid device: ", x[0],get_free_space_mb(x[0])
 							transfer_until_full(image_dir, x[0], green_pin, red_pin, stick_ripped_out)
 							force_unmount_everything()
-	if(device['ACTION']=='unbind' or device['ACTION']=='remove'):
-		print "found remove usb action"
-		stick_ripped_out= True
+# 	if(device['ACTION']=='unbind' or device['ACTION']=='remove'):
+# 		print "found remove usb action"
+# 		stick_ripped_out= True
 
 
 if __name__ == '__main__':
@@ -127,5 +128,5 @@ if __name__ == '__main__':
     green_pin=12
     red_pin=16
     setup_GPIO(green_pin,red_pin)
-    listen(image_directory,mount_directory,green_pin,red_pin, stick_ripped_out)
+    listen(image_directory,mount_directory,green_pin,red_pin)
     
