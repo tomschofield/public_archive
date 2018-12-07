@@ -128,6 +128,7 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 							os.system("umount -l "+ x[0])
 							print "mounting as sync to ", x[0]
 							os.system("mount -o sync /dev/sda1 "+x[0])
+							time.sleep(2)
 							
 							#this line is hack to remove non-existing virtual disk e.g. /media/sda1 (these should return a size which is the available space on the pi)
 							if get_free_space_mb(x[0]) >get_free_space_mb("/home")*1.2:
