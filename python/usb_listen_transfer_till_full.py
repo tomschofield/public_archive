@@ -40,7 +40,7 @@ def get_file_size(path):
 	return os.path.getsize(path) / 1000.0 / 1000.0
 
 #fills the target drive until its full of images sourced from image_dir
-def transfer_until_full(image_dir, drive_path, green_pin, red_pin):
+def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_out):
 	GPIO.output(green_pin,GPIO.LOW)
 	GPIO.output(red_pin,GPIO.HIGH)
 
@@ -83,7 +83,7 @@ def force_unmount_everything():
     os.system(command)
 
 #listen for USB hotplug events
-def listen(image_dir,mount_directory,green_pin,red_pin):
+def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
     BASE_PATH = os.path.abspath(os.path.dirname(__file__))
     path = functools.partial(os.path.join, BASE_PATH)
     call = lambda x, *args: subprocess.call([path(x)] + list(args))
@@ -110,7 +110,7 @@ def listen(image_dir,mount_directory,green_pin,red_pin):
 						#this line is hack to remove non-existing virtual disk e.g. /media/sda1 (these should return a size which is the available space on the pi)
 						if get_free_space_mb(x[0]) >get_free_space_mb("/home")*1.2:
 							print "valid device: ", x[0],get_free_space_mb(x[0])
-							transfer_until_full(image_dir, x[0], green_pin, red_pin)
+							transfer_until_full(image_dir, x[0], green_pin, red_pin, stick_ripped_out)
 							force_unmount_everything()
 	if(device['ACTION']=='unbind' or device['ACTION']=='remove'):
 		stick_ripped_out= True
@@ -125,5 +125,5 @@ if __name__ == '__main__':
     green_pin=12
     red_pin=16
     setup_GPIO(green_pin,red_pin)
-    listen(image_directory,mount_directory,green_pin,red_pin)
+    listen(image_directory,mount_directory,green_pin,red_pin, stick_ripped_out)
     
