@@ -67,7 +67,7 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 				if( e.args[0]==2):
 					print "permissions passing on error so ignore"
 					pass
-				elif:
+				else:
 					stick_ripped_out==True
 					print "stick ripped out in transfer function"
 					break
