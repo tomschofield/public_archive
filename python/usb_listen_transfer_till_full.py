@@ -51,7 +51,7 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 	stick_ripped_out==False
 	file_count = 0
 	print dir_is_empty(image_dir), stick_ripped_out,file_count
-	while (dir_is_empty(image_dir)==False and stick_ripped_out==False and file_count<10):
+	while (dir_is_empty(image_dir)==False and file_count<10):
 		print "start of while. stick_ripped_out: ", stick_ripped_out, file_count
 
 		GPIO.output(red_pin,GPIO.HIGH)
