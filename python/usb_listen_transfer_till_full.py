@@ -54,6 +54,7 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 		try:
 			free_space = get_free_space_mb(drive_path)
 		except:
+			print "no valid file when getting free space"
 			stick_ripped_out = True
 			break
 		print "file: ",first_file_name_in_dir,"file size: ",file_size,"free space on drive", free_space
