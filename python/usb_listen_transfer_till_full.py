@@ -54,7 +54,7 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 		free_space = get_free_space_mb(drive_path)
 		print "file: ",first_file_name_in_dir,"file size: ",file_size,"free space on drive", free_space
 		if(free_space>file_size):
-			command = "cp "+ image_dir+first_file_name_in_dir +" "+drive_path+"/"+first_file_name_in_dir
+			command = "rsync "+ image_dir+first_file_name_in_dir +" "+drive_path+"/"+first_file_name_in_dir
 			#subprocess.call(command)
 			#try:
 			result = os.system(command)
