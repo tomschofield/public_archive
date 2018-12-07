@@ -139,8 +139,8 @@ if __name__ == '__main__':
 	mount_directory = "/media/"
 	print "listening..."
 	force_unmount_everything()
-	green_pin=12
-	red_pin=16
+	green_pin=16
+	red_pin=12
 	setup_GPIO(green_pin,red_pin)
 	listen(image_directory,mount_directory,green_pin,red_pin, stick_ripped_out)
     
