@@ -24,8 +24,12 @@ def setup_GPIO(green_pin, red_pin):
 	GPIO.output(red_pin,GPIO.LOW)        
 
 def get_free_space_mb(dirname):
-	st = os.statvfs(dirname)
-	return st.f_bavail * st.f_frsize / 1024 / 1024
+	try:
+		st = os.statvfs(dirname)
+		return st.f_bavail * st.f_frsize / 1024 / 1024
+	except:
+		print "no valid dir"
+		return 0
 
 def get_file_list(path):
 	onlyfiles = [f for f in listdir(path) if isfile(join(path, f))]
