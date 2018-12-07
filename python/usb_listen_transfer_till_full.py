@@ -114,9 +114,9 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 		time.sleep(2)
 		#mount all devices attached
 		#os.system("mountpy")
-		os.system("mount /dev/sda1 /media/sda1")
-		os.system("mount /dev/sdb1 /media/sdb1")
-		os.system("mount /dev/sdc1 /media/sdc1")
+		os.system("mount -o sync /dev/sda1 /media/sda1")
+		os.system("mount -o sync /dev/sdb1 /media/sdb1")
+		os.system("mount -o sync /dev/sdc1 /media/sdc1")
 		#this is a hacky way of going through sub dirs of a known mount point (/media) and find one that starts in sd and is big
 		for x in os.walk(mount_directory):
 			if(len(x[0].split("/")) == 3):
