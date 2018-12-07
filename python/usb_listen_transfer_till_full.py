@@ -127,7 +127,7 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 		
 		awk_result = os.popen("df -h | awk 'END {print}'").read()
 		print "awk_result",awk_result
-		exploded = awk_result.split("\t")
+		exploded = awk_result.split(" ")
 		print "len(exploded)",len(exploded)
 		mount_from = exploded[1]
 		mount_to = exploded[6]
