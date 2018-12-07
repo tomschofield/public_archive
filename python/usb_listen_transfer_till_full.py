@@ -45,6 +45,7 @@ def get_file_size(path):
 
 #fills the target drive until its full of images sourced from image_dir
 def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_out):
+	print "start transfer until full"
 	GPIO.output(green_pin,GPIO.LOW)
 	GPIO.output(red_pin,GPIO.HIGH)
 	stick_ripped_out==False
