@@ -45,24 +45,28 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 	GPIO.output(red_pin,GPIO.HIGH)
 
 	while (dir_is_empty(image_dir)==False and stick_ripped_out==False):
-		print "stick_ripped_out: ", stick_ripped_out
+		#print "stick_ripped_out: ", stick_ripped_out
 # 		if (stick_ripped_out):
 # 			print "stick ripped out"
 # 			stick_ripped_out = False
 # 			GPIO.output(red_pin,GPIO.LOW)
 # 			GPIO.output(green_pin,GPIO.HIGH)
 # 			break
-		GPIO.output(red_pin,GPIO.HIGH)
-		first_file_name_in_dir = get_file_list(image_dir)[0]
-		file_size = get_file_size(image_dir+first_file_name_in_dir)
-		free_space = get_free_space_mb(drive_path)
-		print "file: ",first_file_name_in_dir,"file size: ",file_size,"free space on drive", free_space
-		if(free_space>file_size):
-			command = "mv "+ image_dir+first_file_name_in_dir +" "+drive_path+"/"+first_file_name_in_dir
-			os.system(command)
-			GPIO.output(red_pin,GPIO.LOW)
-		else:
-			break
+		try:
+			GPIO.output(red_pin,GPIO.HIGH)
+			first_file_name_in_dir = get_file_list(image_dir)[0]
+			file_size = get_file_size(image_dir+first_file_name_in_dir)
+			free_space = get_free_space_mb(drive_path)
+			print "file: ",first_file_name_in_dir,"file size: ",file_size,"free space on drive", free_space
+			if(free_space>file_size):
+				command = "mv "+ image_dir+first_file_name_in_dir +" "+drive_path+"/"+first_file_name_in_dir
+				os.system(command)
+				GPIO.output(red_pin,GPIO.LOW)
+			else:
+				break
+		except IOError:
+                	print "IOError a"
+                	break
 	os.system("eject "+drive_path)
 	print "breaking"
 	GPIO.output(red_pin,GPIO.LOW)
