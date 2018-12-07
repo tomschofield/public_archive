@@ -11,7 +11,7 @@ from os.path import isfile, join
 import platform
 import sys
 import time
-
+stick_ripped_out  = False
 #set the pi pins so it starts off green on and red off
 def setup_GPIO(green_pin, red_pin):
 	GPIO.setmode(GPIO.BCM)
@@ -121,7 +121,7 @@ if __name__ == '__main__':
     image_directory = "../images/"
     mount_directory = "/media/"
     print "listening..."
-    stick_ripped_out  = False
+    
     green_pin=12
     red_pin=16
     setup_GPIO(green_pin,red_pin)
