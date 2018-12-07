@@ -126,7 +126,7 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 		time.sleep(2)
 		
 		mount_from = os.popen("df -h | awk 'END {print $1}'").read()
-		mount_from = os.popen("df -h | awk 'END {print $6}'").read()
+		mount_to = os.popen("df -h | awk 'END {print $6}'").read()
 		
 		print "mount_from nd to",mount_from,mount_to
 		#mount all devices attached
