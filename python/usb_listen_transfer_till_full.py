@@ -64,8 +64,12 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 				subprocess.call(command)
 			except OSError as e:
 				print "IOError a!!!!!!!!!!"
-				if( e.args[0]!=2):
+				if( e.args[0]==2):
+					print "permissions passing on error so ignore"
+					pass
+				elif:
 					stick_ripped_out==True
+					print "stick ripped out in transfer function"
 					break
 			GPIO.output(red_pin,GPIO.LOW)
 		else:
