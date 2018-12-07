@@ -125,7 +125,7 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 		print "found ADD usb action in listen"
 		time.sleep(2)
 		
-		awk_result = os.system("df -h | awk 'END {print $1 " " $6}'",shell=True)
+		awk_result = os.system("df -h | awk 'END {print $1 " " $6}'")
 		print "awk_result",awk_result
 		#mount all devices attached
 		#os.system("mountpy")
