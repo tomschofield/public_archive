@@ -125,8 +125,8 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 		print "found ADD usb action in listen"
 		time.sleep(2)
 		
-		mount_from = os.popen("df -h | awk 'END {print $1}'").read().trim()
-		mount_to = os.popen("df -h | awk 'END {print $6}'").read().trim()
+		mount_from = os.popen("df -h | awk 'END {print $1}'").read().strip()
+		mount_to = os.popen("df -h | awk 'END {print $6}'").read().strip()
 		print "mount_from nd to",mount_from,mount_to
 		os.system("mount -o sync "+ mount_from+" "+mount_to )
 		
