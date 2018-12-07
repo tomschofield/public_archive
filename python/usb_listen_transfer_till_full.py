@@ -44,9 +44,9 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 	GPIO.output(green_pin,GPIO.LOW)
 	GPIO.output(red_pin,GPIO.HIGH)
 	stick_ripped_out==False
-
-	while (dir_is_empty(image_dir)==False and stick_ripped_out==False):
-		print "start of while. stick_ripped_out: ", stick_ripped_out
+	file_count = 0
+	while (dir_is_empty(image_dir)==False and stick_ripped_out==False and file_count<10):
+		print "start of while. stick_ripped_out: ", stick_ripped_out, file_count
 
 		GPIO.output(red_pin,GPIO.HIGH)
 		first_file_name_in_dir = get_file_list(image_dir)[0]
@@ -61,6 +61,7 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 			print "result", result
 			#time.sleep(2)
 			os.system("rm "+image_dir+first_file_name_in_dir)
+			file_count+=1
 			#this is the error code for cannot create regular file
 			if(result ==5888):
 				print "stick ripped out in transfer function"
