@@ -62,8 +62,8 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 			command = "mv "+ image_dir+first_file_name_in_dir +" "+drive_path+"/"+first_file_name_in_dir
 			#subprocess.call(command)
 			#try:
-			os.system(command)
-			#print "result", result
+			result = os.system(command)
+			print "result", result
 			#except OSError as e:
 				#print "IOError a!!!!!!!!!!"
 				#if( e.args[0]==2):
