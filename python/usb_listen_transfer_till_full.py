@@ -129,18 +129,19 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 		mount_to = os.popen("df -h | awk 'END {print $6}'").read().strip()
 		
 		exploded = mount_from.split("/");
-		print "exploded",len(exploded),exploded[0],exploded[1]
-		print "mount_from nd to",mount_from,mount_to
-# 		os.system("mount -o sync "+ mount_from+" "+mount_to )
-		
-		
-		transfer_until_full(image_dir, mount_to, green_pin, red_pin, stick_ripped_out)
-		command = "eject "+mount_to
-		os.system(command)
-		command = "umount -l "+mount_from
-		os.system(command)
-		command = "umount -l "+mount_to
-		os.system(command)
+		if(len(exploded>=3):
+			print "exploded",len(exploded),exploded[0],exploded[2]
+			print "mount_from nd to",mount_from,mount_to
+	# 		os.system("mount -o sync "+ mount_from+" "+mount_to )
+			if(exploded[2]!="root"):
+				print "got valid drive"
+				transfer_until_full(image_dir, mount_to, green_pin, red_pin, stick_ripped_out)
+				command = "eject "+mount_to
+				os.system(command)
+				command = "umount -l "+mount_from
+				os.system(command)
+				command = "umount -l "+mount_to
+				os.system(command)
 # 		force_unmount_everything()
 # 		#mount all devices attached
 # 		#os.system("mountpy")
