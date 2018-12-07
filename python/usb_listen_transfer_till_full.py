@@ -132,7 +132,13 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 		
 		
 		transfer_until_full(image_dir, mount_to, green_pin, red_pin, stick_ripped_out)
-		force_unmount_everything()
+		command = "eject "+mount_to
+		os.system(command)
+		command = "umount -l "+mount_from
+		os.system(command)
+		command = "umount -l "+mount_to
+		os.system(command)
+# 		force_unmount_everything()
 # 		#mount all devices attached
 # 		#os.system("mountpy")
 # # 		os.system("mount -o sync /dev/sda1 /media/sda1")
