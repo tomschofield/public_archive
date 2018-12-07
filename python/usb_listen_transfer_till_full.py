@@ -150,5 +150,6 @@ if __name__ == '__main__':
 	green_pin=16
 	red_pin=12
 	setup_GPIO(green_pin,red_pin)
-	listen(image_directory,mount_directory,green_pin,red_pin, stick_ripped_out)
+	while 1:
+		listen(image_directory,mount_directory,green_pin,red_pin, stick_ripped_out)
     
