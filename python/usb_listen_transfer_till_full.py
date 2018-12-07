@@ -125,53 +125,57 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 		print "found ADD usb action in listen"
 		time.sleep(2)
 		
-		mount_from = os.popen("df -h | awk 'END {print $1}'").read()
-		mount_to = os.popen("df -h | awk 'END {print $6}'").read()
-		
+		mount_from = os.popen("df -h | awk 'END {print $1}'").read().trim()
+		mount_to = os.popen("df -h | awk 'END {print $6}'").read().trim()
 		print "mount_from nd to",mount_from,mount_to
-		#mount all devices attached
-		#os.system("mountpy")
-# 		os.system("mount -o sync /dev/sda1 /media/sda1")
-# 		os.system("mount -o sync /dev/sdb1 /media/sdb1")
-# 		os.system("mount -o sync /dev/sdc1 /media/sdc1")
-		#this is a hacky way of going through sub dirs of a known mount point (/media) and find one that starts in sd and is big
-		for x in os.walk(mount_directory):
-			print "x[0]",x[0],x[1]
-			if(len(x[0].split("/")) >= 3):
-				if(x[0].split("/")[2][:2]=="pi"):
-					if device_count < 1:
-						if (x[0]!="/media/pi/" and x[0]!="/media/pi/SETTINGS"):
-							print "viable device name (unmounting) ", x[0]
-							os.system("umount -l "+ x[0])
-							force_unmount_everything()
-							print "mounting as sync to ", x[0]
-							try:
-								os.system("mount -o sync /dev/sda1 "+x[0])
-								time.sleep(2)
-							except:
-								print "tried to remount non existent drive sda1"
-							try:
-								os.system("mount -o sync /dev/sdb1 "+x[0])
-								time.sleep(2)
-							except:
-								print "tried to remount non existent drive sdb1"
-							try:
-								os.system("mount -o sync /dev/sdc1 "+x[0])
-								time.sleep(2)
-							except:
-								print "tried to remount non existent drive sdc1"
-							try:
-								os.system("mount -o sync /dev/sda "+x[0])
-								time.sleep(2)
-							except:
-								print "tried to remount non existent drive sda"
+		os.system("mount -o sync "+ mount_from+" "+mount_to )
+		
+		
+		transfer_until_full(image_dir, x[0], green_pin, red_pin, stick_ripped_out)
+		force_unmount_everything()
+# 		#mount all devices attached
+# 		#os.system("mountpy")
+# # 		os.system("mount -o sync /dev/sda1 /media/sda1")
+# # 		os.system("mount -o sync /dev/sdb1 /media/sdb1")
+# # 		os.system("mount -o sync /dev/sdc1 /media/sdc1")
+# 		#this is a hacky way of going through sub dirs of a known mount point (/media) and find one that starts in sd and is big
+# 		for x in os.walk(mount_directory):
+# 			print "x[0]",x[0],x[1]
+# 			if(len(x[0].split("/")) >= 3):
+# 				if(x[0].split("/")[2][:2]=="pi"):
+# 					if device_count < 1:
+# 						if (x[0]!="/media/pi/" and x[0]!="/media/pi/SETTINGS"):
+# 							print "viable device name (unmounting) ", x[0]
+# 							os.system("umount -l "+ x[0])
+# 							force_unmount_everything()
+# 							print "mounting as sync to ", x[0]
+# 							try:
+# 								os.system("mount -o sync /dev/sda1 "+x[0])
+# 								time.sleep(2)
+# 							except:
+# 								print "tried to remount non existent drive sda1"
+# 							try:
+# 								os.system("mount -o sync /dev/sdb1 "+x[0])
+# 								time.sleep(2)
+# 							except:
+# 								print "tried to remount non existent drive sdb1"
+# 							try:
+# 								os.system("mount -o sync /dev/sdc1 "+x[0])
+# 								time.sleep(2)
+# 							except:
+# 								print "tried to remount non existent drive sdc1"
+# 							try:
+# 								os.system("mount -o sync /dev/sda "+x[0])
+# 								time.sleep(2)
+# 							except:
+# 								print "tried to remount non existent drive sda"
 							
-							#this line is hack to remove non-existing virtual disk e.g. /media/sda1 (these should return a size which is the available space on the pi)
-							if get_free_space_mb(x[0]) >get_free_space_mb("/home")*1.2:
-								print "valid device: ", x[0],get_free_space_mb(x[0])
-								transfer_until_full(image_dir, x[0], green_pin, red_pin, stick_ripped_out)
-								print "forcing unmount in listen"
-								force_unmount_everything()
+# 							#this line is hack to remove non-existing virtual disk e.g. /media/sda1 (these should return a size which is the available space on the pi)
+# 							if get_free_space_mb(x[0]) >get_free_space_mb("/home")*1.2:
+# 								print "valid device: ", x[0],get_free_space_mb(x[0])
+# 								transfer_until_full(image_dir, x[0], green_pin, red_pin, stick_ripped_out)
+# 								print "forcing unmount in listen"
+# 								force_unmount_everything()
 	if(device['ACTION']=='unbind' or device['ACTION']=='remove'):
 		print "found REMOVE usb action in listen"
 		stick_ripped_out= True
