@@ -51,7 +51,11 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 		GPIO.output(red_pin,GPIO.HIGH)
 		first_file_name_in_dir = get_file_list(image_dir)[0]
 		file_size = get_file_size(image_dir+first_file_name_in_dir)
-		free_space = get_free_space_mb(drive_path)
+		try:
+			free_space = get_free_space_mb(drive_path)
+		except:
+			stick_ripped_out = True
+			break
 		print "file: ",first_file_name_in_dir,"file size: ",file_size,"free space on drive", free_space
 		if(free_space>file_size):
 			command = "rsync -c "+ image_dir+first_file_name_in_dir +" "+drive_path+"/"+first_file_name_in_dir
@@ -82,18 +86,20 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 #this is not really the way to do this...better than ripping out USB sticks when they're mounted though
 def force_unmount_everything():
 
-    command = "umount -l /media/sda1"
-    os.system(command)
-    command = "umount -l /media/sdb1"
-    os.system(command)
-    command = "umount -l /media/sdc1"
-    os.system(command)
-    command = "umount -l /dev/sda1"
-    os.system(command)
-    command = "umount -l /dev/sdb1"
-    os.system(command)
-    command = "umount -l /dev/sdc1"
-    os.system(command)
+	command = "umount -l /media/sda1"
+	os.system(command)
+	command = "umount -l /media/sdb1"
+	os.system(command)
+	command = "umount -l /media/sdc1"
+	os.system(command)
+	command = "umount -l /dev/sda1"
+	os.system(command)
+	command = "umount -l /dev/sdb1"
+	os.system(command)
+	command = "umount -l /dev/sdc1"
+	os.system(command)
+	command = "umount -l /dev/sda"
+	os.system(command)
 
 #listen for USB hotplug events
 def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
