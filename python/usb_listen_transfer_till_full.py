@@ -125,7 +125,7 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 		print "found ADD usb action in listen"
 		time.sleep(2)
 		
-		awk_result = os.system("df -h | awk 'END {print}'")
+		awk_result = subprocess.call("df -h | awk 'END {print}'")
 		print "awk_result",awk_result
 		exploded = awk_result.split(" ")
 		mount_from = exploded[1]
