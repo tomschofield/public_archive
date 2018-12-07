@@ -59,7 +59,7 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 			#try:
 			result = os.system(command)
 			print "result", result
-			#time.sleep(0.2)
+			time.sleep(2)
 			os.system("rm "+image_dir+first_file_name_in_dir)
 			#this is the error code for cannot create regular file
 			if(result ==5888):
