@@ -59,7 +59,7 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 			#try:
 			result = os.system(command)
 			print "result", result
-			time.sleep(2)
+			#time.sleep(2)
 			os.system("rm "+image_dir+first_file_name_in_dir)
 			#this is the error code for cannot create regular file
 			if(result ==5888):
@@ -111,9 +111,12 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
     for device in iter(monitor.poll, None):
 	if (device['ACTION']=='add' or device['ACTION']=='bind'):
 		print "found ADD usb action in listen"
-		time.sleep(3)
+		time.sleep(2)
 		#mount all devices attached
-		os.system("mountpy")
+		#os.system("mountpy")
+		os.system("mount /dev/sda1 /media/sda1")
+		os.system("mount /dev/sdb1 /media/sdb1")
+		os.system("mount /dev/sdc1 /media/sdc1")
 		#this is a hacky way of going through sub dirs of a known mount point (/media) and find one that starts in sd and is big
 		for x in os.walk(mount_directory):
 			if(len(x[0].split("/")) == 3):
