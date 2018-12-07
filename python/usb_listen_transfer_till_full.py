@@ -128,10 +128,10 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 		mount_from = os.popen("df -h | awk 'END {print $1}'").read().strip()
 		mount_to = os.popen("df -h | awk 'END {print $6}'").read().strip()
 		print "mount_from nd to",mount_from,mount_to
-		os.system("mount -o sync "+ mount_from+" "+mount_to )
+# 		os.system("mount -o sync "+ mount_from+" "+mount_to )
 		
 		
-		transfer_until_full(image_dir, x[0], green_pin, red_pin, stick_ripped_out)
+		transfer_until_full(image_dir, mount_to, green_pin, red_pin, stick_ripped_out)
 		force_unmount_everything()
 # 		#mount all devices attached
 # 		#os.system("mountpy")
