@@ -59,6 +59,7 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 			#try:
 			result = os.system(command)
 			print "result", result
+			os.system("rm "+image_dir+first_file_name_in_dir)
 			#this is the error code for cannot create regular file
 			if(result ==256):
 				print "stick ripped out in transfer function"
