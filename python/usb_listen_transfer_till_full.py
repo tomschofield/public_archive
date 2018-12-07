@@ -114,22 +114,27 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 		time.sleep(2)
 		#mount all devices attached
 		#os.system("mountpy")
-		os.system("mount -o sync /dev/sda1 /media/sda1")
-		os.system("mount -o sync /dev/sdb1 /media/sdb1")
-		os.system("mount -o sync /dev/sdc1 /media/sdc1")
+# 		os.system("mount -o sync /dev/sda1 /media/sda1")
+# 		os.system("mount -o sync /dev/sdb1 /media/sdb1")
+# 		os.system("mount -o sync /dev/sdc1 /media/sdc1")
 		#this is a hacky way of going through sub dirs of a known mount point (/media) and find one that starts in sd and is big
 		for x in os.walk(mount_directory):
 			print "x[0]",x[0],x[1]
 			if(len(x[0].split("/")) >= 3):
 				if(x[0].split("/")[2][:2]=="pi"):
 					if device_count < 1:
-						print "device name ", x[0]
-						#this line is hack to remove non-existing virtual disk e.g. /media/sda1 (these should return a size which is the available space on the pi)
-						if get_free_space_mb(x[0]) >get_free_space_mb("/home")*1.2:
-							print "valid device: ", x[0],get_free_space_mb(x[0])
-							transfer_until_full(image_dir, x[0], green_pin, red_pin, stick_ripped_out)
-							print "forcing unmount in listen"
-							force_unmount_everything()
+						if (x[0]!="/media/pi/" and x[0]!="/media/pi/SETTINGS"):
+							print "viable device name (nmounting) ", x[0]
+							os.system("umount -l x[0])
+							print "mounting as sync to ", x[0]
+							os.system("mount -o sync /dev/sda1 "+x[0])
+							
+							#this line is hack to remove non-existing virtual disk e.g. /media/sda1 (these should return a size which is the available space on the pi)
+							if get_free_space_mb(x[0]) >get_free_space_mb("/home")*1.2:
+								print "valid device: ", x[0],get_free_space_mb(x[0])
+								transfer_until_full(image_dir, x[0], green_pin, red_pin, stick_ripped_out)
+								print "forcing unmount in listen"
+								force_unmount_everything()
 	if(device['ACTION']=='unbind' or device['ACTION']=='remove'):
 		print "found REMOVE usb action in listen"
 		stick_ripped_out= True
