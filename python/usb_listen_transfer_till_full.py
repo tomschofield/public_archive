@@ -138,12 +138,28 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 						if (x[0]!="/media/pi/" and x[0]!="/media/pi/SETTINGS"):
 							print "viable device name (unmounting) ", x[0]
 							os.system("umount -l "+ x[0])
+							force_unmount_everything()
 							print "mounting as sync to ", x[0]
 							try:
 								os.system("mount -o sync /dev/sda1 "+x[0])
 								time.sleep(2)
 							except:
-								print "tried to remount non existent drive"
+								print "tried to remount non existent drive sda1"
+							try:
+								os.system("mount -o sync /dev/sdb1 "+x[0])
+								time.sleep(2)
+							except:
+								print "tried to remount non existent drive sdb1"
+							try:
+								os.system("mount -o sync /dev/sdc1 "+x[0])
+								time.sleep(2)
+							except:
+								print "tried to remount non existent drive sdc1"
+							try:
+								os.system("mount -o sync /dev/sda "+x[0])
+								time.sleep(2)
+							except:
+								print "tried to remount non existent drive sda"
 							
 							#this line is hack to remove non-existing virtual disk e.g. /media/sda1 (these should return a size which is the available space on the pi)
 							if get_free_space_mb(x[0]) >get_free_space_mb("/home")*1.2:
