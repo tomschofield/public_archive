@@ -125,7 +125,7 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 					if device_count < 1:
 						if (x[0]!="/media/pi/" and x[0]!="/media/pi/SETTINGS"):
 							print "viable device name (nmounting) ", x[0]
-							os.system("umount -l x[0])
+							os.system("umount -l "+ x[0])
 							print "mounting as sync to ", x[0]
 							os.system("mount -o sync /dev/sda1 "+x[0])
 							
