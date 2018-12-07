@@ -45,6 +45,11 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin):
 	GPIO.output(red_pin,GPIO.HIGH)
 
 	while (dir_is_empty(image_dir)==False):
+		if (stick_ripped_out):
+			stick_ripped_out = False
+			GPIO.output(red_pin,GPIO.LOW)
+			GPIO.output(green_pin,GPIO.HIGH)
+			break
 		GPIO.output(red_pin,GPIO.HIGH)
 		first_file_name_in_dir = get_file_list(image_dir)[0]
 		file_size = get_file_size(image_dir+first_file_name_in_dir)
@@ -92,28 +97,31 @@ def listen(image_dir,mount_directory,green_pin,red_pin):
     device_count = 0
     #if there's a USB event go through the devices one by one
     for device in iter(monitor.poll, None):
+	if (device['ACTION']=='add' or device['ACTION']=='bind'):
+		time.sleep(3)
+		#mount all devices attached
+		os.system("mountpy")
+		#this is a hacky way of going through sub dirs of a known mount point (/media) and find one that starts in sd and is big
+		for x in os.walk(mount_directory):
+			if(len(x[0].split("/")) == 3):
+				if(x[0].split("/")[2][:2]=="sd"):
+					if device_count < 1:
+						print "device name ", x[0]
+						#this line is hack to remove non-existing virtual disk e.g. /media/sda1 (these should return a size which is the available space on the pi)
+						if get_free_space_mb(x[0]) >get_free_space_mb("/home")*1.2:
+							print "valid device: ", x[0],get_free_space_mb(x[0])
+							transfer_until_full(image_dir, x[0], green_pin, red_pin)
+							force_unmount_everything()
+	if(device['ACTION']=='unbind' or device['ACTION']=='remove'):
+		stick_ripped_out= True
 
-	time.sleep(3)
-	#mount all devices attached
-	os.system("mountpy")
-	#this is a hacky way of going through sub dirs of a known mount point (/media) and find one that starts in sd and is big
-	for x in os.walk(mount_directory):
-		if(len(x[0].split("/")) == 3):
-			if(x[0].split("/")[2][:2]=="sd"):
-				if device_count < 1:
-					print "device name ", x[0]
-					#this line is hack to remove non-existing virtual disk e.g. /media/sda1 (these should return a size which is the available space on the pi)
-					if get_free_space_mb(x[0]) >get_free_space_mb("/home")*1.2:
-						print "valid device: ", x[0],get_free_space_mb(x[0])
-						transfer_until_full(image_dir, x[0], green_pin, red_pin)
-						force_unmount_everything()
 
 if __name__ == '__main__':
     # main()
     image_directory = "../images/"
     mount_directory = "/media/"
     print "listening..."
-    
+    stick_ripped_out  = False
     green_pin=12
     red_pin=16
     setup_GPIO(green_pin,red_pin)
