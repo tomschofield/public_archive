@@ -60,18 +60,19 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 		print "file: ",first_file_name_in_dir,"file size: ",file_size,"free space on drive", free_space
 		if(free_space>file_size):
 			command = "mv "+ image_dir+first_file_name_in_dir +" "+drive_path+"/"+first_file_name_in_dir
-			subprocess.call(command)
-			try:
-				subprocess.call(command)
-			except OSError as e:
-				print "IOError a!!!!!!!!!!"
-				if( e.args[0]==2):
-					print "permissions passing on error so ignore"
-					pass
-				else:
-					stick_ripped_out==True
-					print "stick ripped out in transfer function"
-					break
+			#subprocess.call(command)
+			#try:
+			os.system(command)
+			#print "result", result
+			#except OSError as e:
+				#print "IOError a!!!!!!!!!!"
+				#if( e.args[0]==2):
+				#	print "permissions passing on error so ignore"
+				#	pass
+				#else:
+					#stick_ripped_out==True
+					#print "stick ripped out in transfer function"
+					#break
 			GPIO.output(red_pin,GPIO.LOW)
 		else:
 			break
