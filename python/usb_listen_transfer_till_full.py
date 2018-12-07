@@ -61,9 +61,10 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 		if(free_space>file_size):
 			command = "mv "+ image_dir+first_file_name_in_dir +" "+drive_path+"/"+first_file_name_in_dir
 			try:
-				os.system(command)
-			except IOError:
+				subprocess.call(command)
+			except OSError:
 				print "IOError a!!!!!!!!!!"
+				print OSError
 				stick_ripped_out==True
 				break
 			GPIO.output(red_pin,GPIO.LOW)
