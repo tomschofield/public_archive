@@ -46,6 +46,7 @@ def transfer_until_full(image_dir, drive_path, green_pin, red_pin, stick_ripped_
 
 	while (dir_is_empty(image_dir)==False):
 		if (stick_ripped_out):
+			print "stick ripped out"
 			stick_ripped_out = False
 			GPIO.output(red_pin,GPIO.LOW)
 			GPIO.output(green_pin,GPIO.HIGH)
@@ -113,6 +114,7 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 							transfer_until_full(image_dir, x[0], green_pin, red_pin, stick_ripped_out)
 							force_unmount_everything()
 	if(device['ACTION']=='unbind' or device['ACTION']=='remove'):
+		print "found remove usb action"
 		stick_ripped_out= True
 
 
