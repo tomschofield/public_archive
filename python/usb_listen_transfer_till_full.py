@@ -204,4 +204,3 @@ if __name__ == '__main__':
 	setup_GPIO(green_pin,red_pin)
 	while 1:
 		listen(image_directory,mount_directory,green_pin,red_pin, stick_ripped_out)
-    
