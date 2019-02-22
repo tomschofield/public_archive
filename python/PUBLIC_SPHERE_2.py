@@ -137,6 +137,8 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 					command = "eject "+mount_to
 					os.system(command)
 					print "device ejected"
+					GPIO.output(red_pin,GPIO.LOW)
+					GPIO.output(green_pin,GPIO.HIGH)
 					device_count = 0
 					command = "./hub-ctrl -h 0 -P 2 -p 0"
 					os.system(command)
@@ -152,6 +154,8 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 			device_count = 0
 			command = "eject "+mount_to
 			os.system(command)
+			GPIO.output(red_pin,GPIO.LOW)
+			GPIO.output(green_pin,GPIO.HIGH)
 
 
 
@@ -159,8 +163,8 @@ def listen(image_dir,mount_directory,green_pin,red_pin, stick_ripped_out):
 image_directory = "../images/"
 mount_directory = "/media/"
 print "listening..."
-green_pin=16
-red_pin=12
+green_pin=12
+red_pin=16
 setup_GPIO(green_pin,red_pin)
 stick_ripped_out = False
 #while 1:
